@@ -9,6 +9,20 @@
       "display": "Steam User",
       "internal": false
     },
+    "steam_password": {
+      "value": "Password",
+      "required": true,
+      "desc": "Password for Steam login",
+      "display": "Steam Password",
+      "internal": false
+    },
+    "steam_auth": {
+      "value": "------",
+      "required": false,
+      "desc": "Auth Code for Steam login",
+      "display": "Steam Auth Code",
+      "internal": false
+    },
     "ip": {
       "value": "0.0.0.0",
       "required": true,
@@ -36,7 +50,7 @@
     {
       "type": "command",
       "commands": [
-        "steamcmd +force_install_dir /pufferpanel +login ${steam_user} +app_update 233780 +quit",
+        "steamcmd +force_install_dir /pufferpanel +login ${steam_user} ${steam_password} ${steam_auth} +app_update 233780 +quit",
         "touch ./config.cfg",
         "touch ./parameters.txt"
       ]
@@ -49,6 +63,16 @@
   "environment": {
     "type": "docker",
     "image": "steamcmd/steamcmd"
+    "portBindings": [
+      "0.0.0.0:2302:2302/udp",
+      "0.0.0.0:2303:2303/udp",
+      "0.0.0.0:2304:2304/udp",
+      "0.0.0.0:2305:2305/udp",
+      "0.0.0.0:2306:2306/udp",
+      "0.0.0.0:2344:2344/tcp",
+      "0.0.0.0:2344:2344/udp",
+      "0.0.0.0:2345:2345/tcp"
+    ],
   },
   "requirements": {
     "arch": "amd64"
